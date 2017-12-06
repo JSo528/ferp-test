@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /app
+hooks:
+  BeforeInstall:
+    - location: BeforeInstall.sh
+  AfterInstall:
+    - location: AfterInstall.sh
+      timeout: 180
+  ApplicationStart:
+    - location: ApplicationStart.sh
+      timeout: 180
