@@ -3,17 +3,17 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Installing Mocha...
-      - npm install -g mocha
+      # - echo Installing Mocha...
+      # - npm install -g mocha
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - "$(aws ecr get-login --region us-east-1)"
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo Build started on `date`
       - echo Compiling the Node.js code
-      - mocha
+      # - mocha
 
       - echo Building the Docker image...          
       - docker build -t $IMAGE_REPO_NAME:latest .
