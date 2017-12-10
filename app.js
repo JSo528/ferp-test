@@ -43,8 +43,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, function () {
-	console.log("Express server listening on port 3000");
+app.listen(3001, function () {
+	console.log("Express server listening on port 3001");
 });
 
 module.exports = app;
