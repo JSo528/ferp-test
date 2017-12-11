@@ -8,7 +8,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+      - $(aws ecr get-login --region us-east-1)
   build:
     commands:
       - echo Build started on `date`
@@ -17,12 +17,12 @@ phases:
 
       - echo Building the Docker image...          
       - docker build -t ferp-test .
-      - docker tag ferp-test:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
+      - docker tag ferp-test:latest 118755217067.dkr.ecr.us-east-1.amazonaws.com/ferp-test:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG    
+      - docker push 118755217067.dkr.ecr.us-east-1.amazonaws.com/ferp-test:latest    
 artifacts:
   files:
     - '**/*'
