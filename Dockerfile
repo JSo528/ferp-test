@@ -1,12 +1,10 @@
 FROM node:6.10.0
 
 # Install Node.js and other dependencies
-RUN apt-get update && \
-    apt-get -y install curl && \
-    apt-get -y install git && \
-    apt-get -y install wget && \
-    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - && \
-    apt-get install --yes nodejs
+RUN yum update
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+RUN . ~/.nvm/nvm.sh
+RUN nvm install 6.11.5
 
 RUN npm install -g pm2
 
