@@ -1,3 +1,8 @@
-FROM maven:3.3.9-jdk-8
+FROM node:6.10.0
 
-RUN echo "Hello World"
+RUN mkdir -p /usr/local/app
+WORKDIR /usr/local/app
+
+COPY . .
+
+CMD ["npm", "start"]
