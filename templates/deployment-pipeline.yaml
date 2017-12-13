@@ -192,6 +192,18 @@ Resources:
               OutputArtifacts:
                 - Name: App
               RunOrder: 1
+            - Name: Template
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Version: 1
+                Provider: S3
+              OutputArtifacts:
+                - Name: Template
+              RunOrder: 1
+              Configuration:
+                S3Bucket: !Ref TemplateBucket
+                S3ObjectKey: templates.zip
         - Name: Build
           Actions:
             - Name: Build
@@ -220,7 +232,7 @@ Resources:
                 ActionMode: CREATE_UPDATE
                 StackName: !Sub "${AWS::StackName}-Service"
                 Capabilities: CAPABILITY_NAMED_IAM
-                TemplateURL: https://s3.amazonaws.com/aws-cd-templates/ferp-test-football/services.yaml
+                TemplatePath: Template::services.yaml
                 RoleArn: !GetAtt CloudFormationExecutionRole.Arn
                 ParameterOverrides: !Sub |
                   {
@@ -231,6 +243,7 @@ Resources:
                     "Repository": "${Repository}"
                   }
               InputArtifacts:
+                - Name: Template
                 - Name: BuildOutput
               RunOrder: 1
 
