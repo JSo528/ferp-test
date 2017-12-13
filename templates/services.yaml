@@ -52,10 +52,10 @@ Resources:
       ContainerDefinitions:
         - Name: test-app
           Image: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Repository}:${Tag}
-          EntryPoint:
-            - echo "Hello there"
-            - -D
-            - FOREGROUND
+          # EntryPoint:
+          #   - echo "Hello there"
+          #   - -D
+          #   - FOREGROUND
           Essential: true
           Memory: 128
           MountPoints:
