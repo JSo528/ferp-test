@@ -49,7 +49,7 @@ Resources:
   Cluster:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/aws-cd-templates/ecs-cluster.yaml
+      TemplateURL: https://s3.amazonaws.com/aws-cd-templates/ferp-test-football/ecs-cluster.yaml
       Parameters:
         SourceSecurityGroup: !GetAtt LoadBalancer.Outputs.SecurityGroup
         Subnets: !GetAtt VPC.Outputs.Subnets
@@ -58,7 +58,7 @@ Resources:
   DeploymentPipeline:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/aws-cd-templates/deployment-pipeline.yaml
+      TemplateURL: https://s3.amazonaws.com/aws-cd-templates/ferp-test-football/deployment-pipeline.yaml
       Parameters:
         Cluster: !GetAtt Cluster.Outputs.ClusterName
         GitHubUser: !Ref GitHubUser
@@ -71,7 +71,7 @@ Resources:
   LoadBalancer:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/aws-cd-templates/load-balancer.yaml
+      TemplateURL: https://s3.amazonaws.com/aws-cd-templates/ferp-test-football/load-balancer.yaml
       Parameters:
         Subnets: !GetAtt VPC.Outputs.Subnets
         VpcId: !GetAtt VPC.Outputs.VpcId
@@ -79,7 +79,7 @@ Resources:
   VPC:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/aws-cd-templates/vpc.yaml
+      TemplateURL: https://s3.amazonaws.com/aws-cd-templates/ferp-test-football/vpc.yaml
       Parameters:
         Name: !Ref AWS::StackName
         VpcCIDR: 10.215.0.0/16

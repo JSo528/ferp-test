@@ -14,8 +14,8 @@ Resources:
       SecurityGroupIngress:
         - CidrIp: "0.0.0.0/0"
           IpProtocol: "TCP"
-          FromPort: 3001
-          ToPort: 3001
+          FromPort: 3000
+          ToPort: 3000
       VpcId: !Ref VpcId
 
   LoadBalancer:
@@ -29,7 +29,7 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
       LoadBalancerArn: !Ref LoadBalancer
-      Port: 3001
+      Port: 3000
       Protocol: HTTP
       DefaultActions:
         - Type: forward
@@ -40,7 +40,7 @@ Resources:
     DependsOn: LoadBalancer
     Properties:
       VpcId: !Ref VpcId
-      Port: 3001
+      Port: 3000
       Protocol: HTTP
       Matcher:
         HttpCode: 200-299
