@@ -17,3 +17,5 @@ COPY . .
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
+
+RUN curl -X POST -d 'testNumber=7' http://ec2-54-237-158-152.compute-1.amazonaws.com:3000/api/run-test
