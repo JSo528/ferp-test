@@ -1,7 +1,0 @@
-echo "** START"
-echo "$LIFECYCLE_EVENT"
-echo "$DEPLOYMENT_ID"
-echo "$APPLICATION_NAME"
-echo "$DEPLOYMENT_GROUP_NAME"
-echo "$DEPLOYMENT_GROUP_ID"
-echo "** END"
