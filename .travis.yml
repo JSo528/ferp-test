@@ -7,16 +7,6 @@ branches:
 services:
   - docker
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
-
-  # Travis uses an older docker-composer (v1.4.2), we need to update it.
-  - docker-compose --version
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/1.8.0-rc2/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
 script:
@@ -26,5 +16,5 @@ script:
   - docker push 118755217067.dkr.ecr.us-east-1.amazonaws.com/ferp-football-travis:latest
 env:
   global:
-  - secure: wqSTXc4TAY1SPTya7IH/kvM8a3GXgr2k7GoDmASmGHfliGBFvcMXmCibOuBUGQSk3LHXCDmaVkmSQk2/KtqvoTuhksKJI3ptmaY8jgqffjO9oqkt6cyQjWKojdBjo8jUEnZ7ax4rHgPE0Ztg+l2GH60iya5N6LLiF5GnAgWtvLuYwg1YlOjV9vTZ4ARF4mywk/EwpnaJtnN9xsd+CkXlc+1pvxhFE18OlVRoImwj65SCmPALXUwpo2G9DOXAsKGM6aopbWYvUmEXlqSCVCaLlEAUq/Q1FL891OpYxFyoZxtCyK19WoH6kcsh3mFmnweo1vRQNVf+H/YfujADRi31kZKMbMKVFetxBPh9hbI8o1vcRxEEK7r4ZCefXTnes63Ea4W+JtrfboGkb5bLmiyrg9uzsHG0RxCSciaoPTW9v29PbW/gRdYC5AFhQgtFAAXBYCSj5260nnuNm7ayvn+Rjyft0qq40zbfFZXmRLagpk+hiKOQFZE0prrDfltz9Oc1GynwiRFm7s3xISxedcT+D0Lal49rr+1k23yjGKYX7Hg9tni1OmEfLN2Mo7MCy9o/jYiKGH8mH+NeL9WlidZqkKhhC7W8jslsRRjLQ6JbbaDr0KK1132kWq3dCk5oXMHDbN9Hsq4bGQxvcN0Q6O49okWargclqyd2z03EdEYJpII=
-  - secure: td279sKdCoIWHSAWgubP2A3qBg2Sr3kEbsuGlCzzjrDHM981rBtmy2QMznT02klqcQxzdBqR+BKEWq10kpZqfCLKLNF19InRVG/S91JiKLCv79fzKgqz+JylI1lHO4N1uKvHHys+MqeP0C9jV/s6IraBDuIT47Zje5PZvdBRuCA3jiTtjM/9p6W7DJRcvUPo4k1hxq1OBgAhxUasf43M9fxHcqs+j51c4fqX2cnAHTlN5PLH7DiWnXfk7iFXelOrmh3H41eL/20VZFJ/ASsuBJFyJjSBM66c/5bQmXNu9yC8cJCiwPbjBTc/d0H4iolR84my4yzhKtBqvy58uRNye476kFTHCFW2BrI/a/ju4SpMOvPJmidFD0VvjTJMSKCXbFLpnvhZoq342yuQzmvFFlcMzZixIbyvVKxR7ihsi7eemQLQO232evUb3DKV2FeKU8IZmVUg8W5naw6AHY4xHczv7cDsJ9+lN5pxg7NxyEhIS6SHGQ4SqGiFSo7MooeuBa6/Vg6+hnCejSUa3m2qnLZC4AXtFlsLeL6nu6lXle9ti3xpCnqVj+BFpXErcX60JG+IUGCOUOyDX1LijadLZXFTVqVfkWpLSy+s92AcvfX4iTp8qpIXs9D45Nhb09CvIyEJIp1Wy0KcUsF9hhETwyLBU1oIfTww7wO9JotCGQU=
+  - secure: RVo3rVK22ihn6PxqzaqF/O2Y6ACZdU+vC6EB2jDOJqoZvAFSuvqWfxUe6Q+VVH7rXtB5pklT5CHs3uR/IQZCYOt5gLW8nmfzo+yUq2SIdN31pYmYVK/mSvlNAogkaRQbQK5MB4aU0e0XRq6Z/SF+KyVnCoLFdmQqMmpQKcUi2b9u6Ff4AIShhmcrgpBSaqpDODnVAQQp6NGrJPdGNHct5ifBpnFLzOcjkEyNuRoPR8Qj4RjfSUoRfwlMZTwVdmBSJRgNGYjjGzyW264JHQNNJ4yMP/F6bRvAQdz8JiTvzkqIIx6zqueAATTR+WzhUoD+sLy6uRf5ewRTdgVYdeSoXBbmU8azjjF6nfpN1kdbFn/7ffMhpXlryIj+8K110u2G2r/FqjC29MjHa9Jr0/0XpxCKvA1bsKtTzqJFigpI44Th+oZE5i48UGVPS44fMWaPcEAuk4ibd41mQzxDOhFcpSPNLQWd9AqtcHalCRyZutAnk/NZpBq3+hGmQjRHkmRETBM/9eVZDzrxQhdTl4SnzUxenj6C/ibi6HOi1zWahCr/X+J5cHGHcWh7RRJxYuuMoWP/LfxfGNqpwg7RTL3pLmdkQ6mvzxL0P0UnfU/a/nyU/fxr3CYvpbcW6cwBOnt7TOD/B/Y0uYcj5tJUd0GbTbn0V+Z34I8GZAnjn+1M/w4=
+  - secure: 2uWA+aNWTgHLPRiMn7HvG3sY9a/AolCYgGyIok3Wee9LH/xTb5O99aHMDaxTENAo7I83kwbfzCR/sGEsZ38YuUmHd+eORzMUaEi/xAnaGGvnd4oHcA6i+Yy0c/qom0xClkPZugKF25ydEQO2srrPjqVreCSm93nTEPxQoh0qj/gc722WvkBdvw8FyEUDdmekmoaWZHmkmnU04+Un56TTY6cC+zVBdUO5dXanVKkRVLeCBvDLYopZsHZjoZPhWlnU0tHu14tKaEgPiQtaHw4/GNVXhc5YOxdfsmgQ8D9iDNXkRXtzqxZyRMg1EvbiPX4mTEixLSsdPvcdxJWklBCdsUQpdW94ffLk2HQfqaeYRrFcvLdaKgVKYbOYWUTTY46jKh9B0tpSUyaaLGojS4SoNVgo0nDc3y6kNuJDFL2BJ4uqiA92vbeU0HXmC+uFWaeiajufxb46BzvtqLdV1qPtDNGJhLCvOmwVBDvmaNKOKAjiQzSW6TT7t3IwFHO4y+t5vS8AxKGPLUEoYCtHHT6RKoQ1oXEVB1m3ezcVIZQqZzRNsBQzvW8h9whJzhxX0HNTMHdTAdgyMmfM947M6DQA0tpqpievB+bTV1tANE3hAH/9NNxaW5xYIOuoaD2iFy47kUGhmOavAjfaDfTCTSnQnpVP4dhlrIBSEykl5pm7hMI=
