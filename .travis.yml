@@ -12,8 +12,10 @@ deploy:
     skip_cleanup: true
     on: &1
       repo: jso528/ferp-test
+      branch: football-travis-codedeploy
     bucket: ferp-football-travis-codedeploy
     region: football
+    
   - provider: codedeploy
     access_key_id: AKIAJXFLDEXV2QNSJMAQ
     bucket: ferp-football-travis-codedeploy
