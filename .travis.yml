@@ -12,7 +12,7 @@ deploy:
     local_dir: dpl_cd_upload
     skip_cleanup: true
     on: &1
-      repo: jso528/ferp-test
+      repo: JSo528/ferp-test
       # branch: football-travis-codedeploy
     bucket: ferp-football-travis-codedeploy
     region: us-east-1
