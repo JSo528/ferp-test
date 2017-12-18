@@ -33,3 +33,6 @@ script:
 - zip -r latest *
 - mkdir -p dpl_cd_upload
 - mv latest.zip dpl_cd_upload/latest.zip
+
+notifications:
+    slack: trumedianetworks:gZJGHGDakaZqOM3ot8vAF7X7
