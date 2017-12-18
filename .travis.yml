@@ -1,19 +1,31 @@
 language: node_js
 node_js:
 - '6'
-branches:
-  only:
-  - football-travis
-services:
-  - docker
-after_success:
-  - pip install --user awscli
-  - export PATH=$PATH:$HOME/.local/bin
-  - eval $(aws ecr get-login --no-include-email --region us-east-1)
-  - docker build -t ferp-football-travis .
-  - docker tag ferp-football-travis:latest 118755217067.dkr.ecr.us-east-1.amazonaws.com/ferp-football-travis:latest
-  - docker push 118755217067.dkr.ecr.us-east-1.amazonaws.com/ferp-football-travis:latest
-env:
-  global:
-    - secure: RVo3rVK22ihn6PxqzaqF/O2Y6ACZdU+vC6EB2jDOJqoZvAFSuvqWfxUe6Q+VVH7rXtB5pklT5CHs3uR/IQZCYOt5gLW8nmfzo+yUq2SIdN31pYmYVK/mSvlNAogkaRQbQK5MB4aU0e0XRq6Z/SF+KyVnCoLFdmQqMmpQKcUi2b9u6Ff4AIShhmcrgpBSaqpDODnVAQQp6NGrJPdGNHct5ifBpnFLzOcjkEyNuRoPR8Qj4RjfSUoRfwlMZTwVdmBSJRgNGYjjGzyW264JHQNNJ4yMP/F6bRvAQdz8JiTvzkqIIx6zqueAATTR+WzhUoD+sLy6uRf5ewRTdgVYdeSoXBbmU8azjjF6nfpN1kdbFn/7ffMhpXlryIj+8K110u2G2r/FqjC29MjHa9Jr0/0XpxCKvA1bsKtTzqJFigpI44Th+oZE5i48UGVPS44fMWaPcEAuk4ibd41mQzxDOhFcpSPNLQWd9AqtcHalCRyZutAnk/NZpBq3+hGmQjRHkmRETBM/9eVZDzrxQhdTl4SnzUxenj6C/ibi6HOi1zWahCr/X+J5cHGHcWh7RRJxYuuMoWP/LfxfGNqpwg7RTL3pLmdkQ6mvzxL0P0UnfU/a/nyU/fxr3CYvpbcW6cwBOnt7TOD/B/Y0uYcj5tJUd0GbTbn0V+Z34I8GZAnjn+1M/w4=
-    - secure: 2uWA+aNWTgHLPRiMn7HvG3sY9a/AolCYgGyIok3Wee9LH/xTb5O99aHMDaxTENAo7I83kwbfzCR/sGEsZ38YuUmHd+eORzMUaEi/xAnaGGvnd4oHcA6i+Yy0c/qom0xClkPZugKF25ydEQO2srrPjqVreCSm93nTEPxQoh0qj/gc722WvkBdvw8FyEUDdmekmoaWZHmkmnU04+Un56TTY6cC+zVBdUO5dXanVKkRVLeCBvDLYopZsHZjoZPhWlnU0tHu14tKaEgPiQtaHw4/GNVXhc5YOxdfsmgQ8D9iDNXkRXtzqxZyRMg1EvbiPX4mTEixLSsdPvcdxJWklBCdsUQpdW94ffLk2HQfqaeYRrFcvLdaKgVKYbOYWUTTY46jKh9B0tpSUyaaLGojS4SoNVgo0nDc3y6kNuJDFL2BJ4uqiA92vbeU0HXmC+uFWaeiajufxb46BzvtqLdV1qPtDNGJhLCvOmwVBDvmaNKOKAjiQzSW6TT7t3IwFHO4y+t5vS8AxKGPLUEoYCtHHT6RKoQ1oXEVB1m3ezcVIZQqZzRNsBQzvW8h9whJzhxX0HNTMHdTAdgyMmfM947M6DQA0tpqpievB+bTV1tANE3hAH/9NNxaW5xYIOuoaD2iFy47kUGhmOavAjfaDfTCTSnQnpVP4dhlrIBSEykl5pm7hMI=
+cche:
+  directories:
+  - node_modules
+deploy:
+  matrix:
+  - provider: s3
+    access_key_id: AKIAJXFLDEXV2QNSJMAQ
+    local_dir: dpl_cd_upload
+    skip_cleanup: true
+    on: &1
+      repo: jso528/ferp-test
+    bucket: ferp-football-travis-codedeploy
+    region: football
+  - provider: codedeploy
+    access_key_id: AKIAJXFLDEXV2QNSJMAQ
+    bucket: ferp-football-travis-codedeploy
+    key: latest.zip
+    bundle_type: zip
+    application: ferp-football-travis-codedeploy
+    deployment_group: football
+    region: us-east-1
+    on: *1
+  secret_access_key:
+    secure: Fsm4isN9WKTsdPBRgeaHTKpBhK4J3TrtitzXx+Z0NZmOFSjMuPVh4bQsvcCWDLaqupu71YiTkJotjoEXvlrqaYicmj/trPPN1Onf/L5LAi3YaPRBtFRUaqb+/70Scmxeedy+vpQPTSktlfVh+LD/5DaEBith1UigRnOKJ0z05zeyaxc1XV4GVlExSZkqp5f35ViHmsHp8epdhzDVvHBvySRL9npyaQyZAbg8e8u7SQO/Lk1Hym55BWXR1enKFHD2Kt5/WxP/kC5rGFjuLzV/ah35auRrwnieQGog3VuzPuGQMuMecZKFMKE6o7sGUqJNPmXeccLbep6vI3LVIiHJLtjgSgMFOTiK3AYq8k2dFlcPuQQs8PRo6nexaRRUJwpnv0zrf+SBU2jeeodZKzDzWABZQ82nGb1BMlrxy0989VwF670rf7qz2mXkyPyl/uBhjpwUX4eFhVKsUW6yp1MFY7IauWjO6qCiNBLjfw1oOkyCWiMufFBjzA8A22ZrExY9vh1IhNEUj80q0TimOERjySB8e3oXVOCvuHb3XFd2hbHXME7BSMYIvSGfcOBoX10Hwc78R3jwjGxE/6mWEJ+n5un3rh02U92a1HCS1H8lG1PFVKWkKsO+8J3HHNCHw6sFi6Pu0GoLGJ8m7niTe+lyqNa0I/J4rXaYcQ0W+zRIwsM=
+script:
+- zip -r latest *
+- mkdir -p dpl_cd_upload
+- mv latest.zip dpl_cd_upload/latest.zip
