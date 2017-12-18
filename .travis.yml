@@ -13,9 +13,6 @@ deploy:
     skip_cleanup: true
     bucket: ferp-football-travis-codedeploy
     region: us-east-1
-    on:
-      branch: football-travis-codedeploy
-    
     
   - provider: codedeploy
     access_key_id: AKIAJXFLDEXV2QNSJMAQ
@@ -26,8 +23,6 @@ deploy:
     application: ferp-football-travis-codedeploy
     deployment_group: football
     region: us-east-1
-    on:
-      branch: football-travis-codedeploy
   
 script:
 - zip -r latest *
