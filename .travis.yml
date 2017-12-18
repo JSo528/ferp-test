@@ -11,9 +11,6 @@ deploy:
       secure: Fsm4isN9WKTsdPBRgeaHTKpBhK4J3TrtitzXx+Z0NZmOFSjMuPVh4bQsvcCWDLaqupu71YiTkJotjoEXvlrqaYicmj/trPPN1Onf/L5LAi3YaPRBtFRUaqb+/70Scmxeedy+vpQPTSktlfVh+LD/5DaEBith1UigRnOKJ0z05zeyaxc1XV4GVlExSZkqp5f35ViHmsHp8epdhzDVvHBvySRL9npyaQyZAbg8e8u7SQO/Lk1Hym55BWXR1enKFHD2Kt5/WxP/kC5rGFjuLzV/ah35auRrwnieQGog3VuzPuGQMuMecZKFMKE6o7sGUqJNPmXeccLbep6vI3LVIiHJLtjgSgMFOTiK3AYq8k2dFlcPuQQs8PRo6nexaRRUJwpnv0zrf+SBU2jeeodZKzDzWABZQ82nGb1BMlrxy0989VwF670rf7qz2mXkyPyl/uBhjpwUX4eFhVKsUW6yp1MFY7IauWjO6qCiNBLjfw1oOkyCWiMufFBjzA8A22ZrExY9vh1IhNEUj80q0TimOERjySB8e3oXVOCvuHb3XFd2hbHXME7BSMYIvSGfcOBoX10Hwc78R3jwjGxE/6mWEJ+n5un3rh02U92a1HCS1H8lG1PFVKWkKsO+8J3HHNCHw6sFi6Pu0GoLGJ8m7niTe+lyqNa0I/J4rXaYcQ0W+zRIwsM=
     local_dir: dpl_cd_upload
     skip_cleanup: true
-    on: &1
-      repo: JSo528/ferp-test
-      # branch: football-travis-codedeploy
     bucket: ferp-football-travis-codedeploy
     region: us-east-1
     
@@ -27,7 +24,6 @@ deploy:
     application: ferp-football-travis-codedeploy
     deployment_group: football
     region: us-east-1
-    on: *1
   
 script:
 - zip -r latest *
