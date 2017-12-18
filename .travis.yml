@@ -26,8 +26,6 @@ deploy:
     application: ferp-football-travis-codedeploy
     deployment_group: football
     region: us-east-1
-    on:
-      branch: football-travis-codedeploy
   
 script:
 - zip -r latest *
