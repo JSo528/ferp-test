@@ -47,7 +47,8 @@ make_task_def(){
 			"cpu": 256,
 			"portMappings": [
 				{
-					"containerPort": 3000
+					"containerPort": 3000,
+                    "hostPort": 3000
 				}
 			]
 		}
