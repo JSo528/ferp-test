@@ -10,9 +10,10 @@ after_success:
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
   - eval $(aws ecr get-login --no-include-email --region us-east-1)
-  - docker build -t ferp-football-travis .
-  - docker tag ferp-football-travis:latest 118755217067.dkr.ecr.us-east-1.amazonaws.com/ferp-football-travis:latest
-  - docker push 118755217067.dkr.ecr.us-east-1.amazonaws.com/ferp-football-travis:latest
+  - docker build -t ferp-travis-docker .
+  - docker tag ferp-travis-docker:latest 118755217067.dkr.ecr.us-east-1.amazonaws.com/jso528/ferp-travis-docker:latest
+  - docker push 118755217067.dkr.ecr.us-east-1.amazonaws.com/jso528/ferp-travis-docker:latest
+  - sh deploy.sh
 env:
   global:
     - secure: RVo3rVK22ihn6PxqzaqF/O2Y6ACZdU+vC6EB2jDOJqoZvAFSuvqWfxUe6Q+VVH7rXtB5pklT5CHs3uR/IQZCYOt5gLW8nmfzo+yUq2SIdN31pYmYVK/mSvlNAogkaRQbQK5MB4aU0e0XRq6Z/SF+KyVnCoLFdmQqMmpQKcUi2b9u6Ff4AIShhmcrgpBSaqpDODnVAQQp6NGrJPdGNHct5ifBpnFLzOcjkEyNuRoPR8Qj4RjfSUoRfwlMZTwVdmBSJRgNGYjjGzyW264JHQNNJ4yMP/F6bRvAQdz8JiTvzkqIIx6zqueAATTR+WzhUoD+sLy6uRf5ewRTdgVYdeSoXBbmU8azjjF6nfpN1kdbFn/7ffMhpXlryIj+8K110u2G2r/FqjC29MjHa9Jr0/0XpxCKvA1bsKtTzqJFigpI44Th+oZE5i48UGVPS44fMWaPcEAuk4ibd41mQzxDOhFcpSPNLQWd9AqtcHalCRyZutAnk/NZpBq3+hGmQjRHkmRETBM/9eVZDzrxQhdTl4SnzUxenj6C/ibi6HOi1zWahCr/X+J5cHGHcWh7RRJxYuuMoWP/LfxfGNqpwg7RTL3pLmdkQ6mvzxL0P0UnfU/a/nyU/fxr3CYvpbcW6cwBOnt7TOD/B/Y0uYcj5tJUd0GbTbn0V+Z34I8GZAnjn+1M/w4=
