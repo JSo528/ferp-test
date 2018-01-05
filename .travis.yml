@@ -6,24 +6,23 @@ cche:
   - node_modules
 deploy:
   - provider: s3
-    access_key_id: AKIAJXFLDEXV2QNSJMAQ
-    secret_access_key: &2
-      secure: Fsm4isN9WKTsdPBRgeaHTKpBhK4J3TrtitzXx+Z0NZmOFSjMuPVh4bQsvcCWDLaqupu71YiTkJotjoEXvlrqaYicmj/trPPN1Onf/L5LAi3YaPRBtFRUaqb+/70Scmxeedy+vpQPTSktlfVh+LD/5DaEBith1UigRnOKJ0z05zeyaxc1XV4GVlExSZkqp5f35ViHmsHp8epdhzDVvHBvySRL9npyaQyZAbg8e8u7SQO/Lk1Hym55BWXR1enKFHD2Kt5/WxP/kC5rGFjuLzV/ah35auRrwnieQGog3VuzPuGQMuMecZKFMKE6o7sGUqJNPmXeccLbep6vI3LVIiHJLtjgSgMFOTiK3AYq8k2dFlcPuQQs8PRo6nexaRRUJwpnv0zrf+SBU2jeeodZKzDzWABZQ82nGb1BMlrxy0989VwF670rf7qz2mXkyPyl/uBhjpwUX4eFhVKsUW6yp1MFY7IauWjO6qCiNBLjfw1oOkyCWiMufFBjzA8A22ZrExY9vh1IhNEUj80q0TimOERjySB8e3oXVOCvuHb3XFd2hbHXME7BSMYIvSGfcOBoX10Hwc78R3jwjGxE/6mWEJ+n5un3rh02U92a1HCS1H8lG1PFVKWkKsO+8J3HHNCHw6sFi6Pu0GoLGJ8m7niTe+lyqNa0I/J4rXaYcQ0W+zRIwsM=
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
     local_dir: dpl_cd_upload
     skip_cleanup: true
-    bucket: ferp-football-travis-codedeploy
+    bucket: ferp-test
     region: us-east-1
     on:
       branch: football-travis-codedeploy
     
     
   - provider: codedeploy
-    access_key_id: AKIAJXFLDEXV2QNSJMAQ
-    secret_access_key: *2
-    bucket: ferp-football-travis-codedeploy
+      access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+    bucket: ferp-test
     key: latest.zip
     bundle_type: zip
-    application: ferp-football-travis-codedeploy
+    application: ferp-test
     deployment_group: football
     region: us-east-1
     on:
@@ -33,6 +32,3 @@ script:
 - zip -r latest *
 - mkdir -p dpl_cd_upload
 - mv latest.zip dpl_cd_upload/latest.zip
-
-notifications:
-    slack: trumedianetworks:gZJGHGDakaZqOM3ot8vAF7X7

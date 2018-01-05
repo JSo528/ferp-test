@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+- '6'
+branches:
+  only:
+  - baseball_2018_jason
+services:
+  - docker
+after_success:
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
+  - eval $(aws ecr get-login --no-include-email --region us-east-1)
+  # - docker build -t ferp-travis-docker .
+  # - docker tag ferp-travis-docker:latest 118755217067.dkr.ecr.us-east-1.amazonaws.com/jso528/ferp-travis-docker:latest
+  # - docker push 118755217067.dkr.ecr.us-east-1.amazonaws.com/jso528/ferp-baseball--docker:latest
+  # - sh deploy.sh
